@@ -24,5 +24,6 @@ The Martial Arts Academy is a client-side web application built using React.js. 
 - react-router-dom: Package for adding routing functionality to React applications.
 - CSS Frameworks: Tailwind CSS for styling components.
 
+## Technologies Used
 
 - Website: [Live Site: Click here](https://symphonious-begonia-0a337a.netlify.app/)
