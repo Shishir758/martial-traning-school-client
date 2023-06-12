@@ -1,61 +1,71 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import Swal from 'sweetalert2';
+import React, { useEffect, useState } from 'react';
 
+const CheckOut = ({ fees}) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [cardError, setCardError] = useState('');
+  const [clientSecret, setClientSecret] = useState('');
+  const [processing, setProcessing] = useState(false);
 
-const CheckOut = ({fees}) => {
-    const stripe= useStripe();
-    const elements= useElements();
-    const [cardError, setCardError] =useState([])
-
-    useEffect(() => {
-      fetch('https://assignment-twelve-server-pi.vercel.app/createPayment', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ fees }), 
+  useEffect(() => {
+    fetch('http://localhost:5000/createPayment', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ fees }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setClientSecret(data.clientSecret);
       })
-        .then((res) => res.json())
-        .then((data) => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          return data;
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }, []);
-    
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
 
-    const handleSubmit =async(event)=>{
-        event.prevent.Default();
-        if(!stripe ||elements){
-            return;
-        }
-        const card = elements.getElement(CardElement)
-        if(card === null){
-            return;
-        }
-
-        const {error, paymentMethod} = await stripe.createPaymentMethod({
-          type:'card',
-          card
-        })
-        if(error){
-          setCardError(error.message);
-        }else{
-
-        }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!stripe || !elements) {
+      return;
     }
 
-    return (
-        <>
-        <form onSubmit={handleSubmit}>
+    const card = elements.getElement(CardElement);
+    if (card===null) {
+      return;
+    }
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card,
+
+    });
+    if(error){console.log('error', error)
+    setCardError(error.message)}else{
+      setCardError('');
+      console.log('paymentMethod',paymentMethod);
+    }
+    const {paymentIntent, error:confirmError} = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: 'Jenny Rosen',
+          },
+        },
+      },
+    );
+    setProcessing(false)
+    if(confirmError){
+      console.log(confirmError);
+    }
+    console.log(paymentIntent);
+
+  };
+
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
         <CardElement
           options={{
             style: {
@@ -72,14 +82,13 @@ const CheckOut = ({fees}) => {
             },
           }}
         />
-        <button type="submit" disabled={!stripe}>
-          Pay
+        <button className="btn bg-blue-500 py-1 px-1" type="submit" disabled={!stripe||!clientSecret||processing}>
+          Payment
         </button>
-        </form>
-        {cardError && <p>{cardError}</p>}
-        </>
-
-    );
+      </form>
+      {cardError && <p>{cardError}</p>}
+    </>
+  );
 };
 
 export default CheckOut;

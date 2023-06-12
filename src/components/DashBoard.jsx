@@ -46,10 +46,9 @@ const DashBoard = () => {
   const instructor = users.find((role) => role.role === 'Instructor');
 
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      text: "You can add this class again.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -58,14 +57,13 @@ const DashBoard = () => {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          console.log(id);
           fetch(`https://assignment-twelve-server-pi.vercel.app/selectedClasses/${id}`, { method: 'delete' })
             .then(res => res.json())
             .then(data => {
               if (data.deletedCount > 0) {
                 Swal.fire(
                   'Deleted!',
-                  'Your file has been deleted.',
+                  'The class has been deleted.',
                   'success'
                 );
                 fetch(`https://assignment-twelve-server-pi.vercel.app/selectedClasses/${user?.email}`)
@@ -151,8 +149,8 @@ const DashBoard = () => {
   <td>
 
     
-  <Link to={`/payment/${myclass.clas.fees}`}><button
-      onClick={() => handlePaymentClick(myclass.clas.fees, myclass._id )}
+  <Link to={`/payment/${myclass.clas}`}><button
+      onClick={() => handlePaymentClick()}
       className='bg-orange-500 rounded-md text-white text-bold px-4 py-2 my-2'
     >Pay</button></Link>
 

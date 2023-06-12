@@ -33,7 +33,7 @@ const Classes = () => {
 
   const enrollClass = (clas) => {
     const selectedClass = { clas, email: user.email };
-    fetch('https://assignment-twelve-server-pi.vercel.app/selectedClasses', {
+    fetch('http://localhost:5000/selectedClasses', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(selectedClass),
@@ -43,9 +43,9 @@ const Classes = () => {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Your work has been saved',
+          title: 'The class has been saved!!',
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2000,
         });
         return data;
       })
@@ -53,8 +53,6 @@ const Classes = () => {
         console.error('Error:', error);
       });
   };
-
-  {/*TODOOOOOOOO      sweetAlart not fire*/}
   
 
 
