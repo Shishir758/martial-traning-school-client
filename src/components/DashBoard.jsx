@@ -26,7 +26,7 @@ const DashBoard = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user?.email}`)
+    fetch(`https://assignment-twelve-server-pi.vercel.app/users/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -34,7 +34,7 @@ const DashBoard = () => {
   }, [user]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/selectedClasses/${user?.email}`)
+    fetch(`https://assignment-twelve-server-pi.vercel.app/selectedClasses/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setMyClasses(data);
@@ -59,7 +59,7 @@ const DashBoard = () => {
       .then((result) => {
         if (result.isConfirmed) {
           console.log(id);
-          fetch(`http://localhost:5000/selectedClasses/${id}`, { method: 'delete' })
+          fetch(`https://assignment-twelve-server-pi.vercel.app/selectedClasses/${id}`, { method: 'delete' })
             .then(res => res.json())
             .then(data => {
               if (data.deletedCount > 0) {
@@ -68,7 +68,7 @@ const DashBoard = () => {
                   'Your file has been deleted.',
                   'success'
                 );
-                fetch(`http://localhost:5000/selectedClasses/${user?.email}`)
+                fetch(`https://assignment-twelve-server-pi.vercel.app/selectedClasses/${user?.email}`)
                   .then((res) => res.json())
                   .then((data) => {
                     setMyClasses(data);

@@ -14,7 +14,7 @@ const Instructors = () => {
 
 
  /*  useEffect(() => {
-    fetch('http://localhost:5000/users')
+    fetch('https://assignment-twelve-server-pi.vercel.app/users')
       .then((res) => res.json())
       .then((data) => setDetailsData(data));
   }, []); */

@@ -63,7 +63,7 @@ const Register = () => {
         setError(error.message);
       });
 
-    fetch('http://localhost:5000/users', {
+    fetch('https://assignment-twelve-server-pi.vercel.app/users', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(userData)

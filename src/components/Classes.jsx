@@ -20,7 +20,7 @@ const Classes = () => {
 
   const [classes, setClasses] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5000/classes')
+    fetch('https://assignment-twelve-server-pi.vercel.app/classes')
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
@@ -33,7 +33,7 @@ const Classes = () => {
 
   const enrollClass = (clas) => {
     const selectedClass = { clas, email: user.email };
-    fetch('http://localhost:5000/selectedClasses', {
+    fetch('https://assignment-twelve-server-pi.vercel.app/selectedClasses', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(selectedClass),

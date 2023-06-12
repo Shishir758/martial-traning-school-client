@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://assignment-twelve-server-pi.vercel.app',
 });
 
 api.interceptors.response.use(

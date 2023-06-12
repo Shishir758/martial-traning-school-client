@@ -34,7 +34,7 @@ const Home = () => {
 
   const [classes, setClasses] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5000/classes')
+    fetch('https://assignment-twelve-server-pi.vercel.app/classes')
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);

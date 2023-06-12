@@ -16,12 +16,12 @@ const UpdateClass = () => {
   const queryClient = useQueryClient();
 
   const { data: clas } = useQuery(['class', id], async () => {
-    const response = await axios.get(`http://localhost:5000/classes/${id}`);
+    const response = await axios.get(`https://assignment-twelve-server-pi.vercel.app/classes/${id}`);
     return response.data;
   });
 
   const updateClassMutation = useMutation((updateInfo) =>
-    axios.patch(`http://localhost:5000/updateclass/${id}`, updateInfo)
+    axios.patch(`https://assignment-twelve-server-pi.vercel.app/updateclass/${id}`, updateInfo)
   );
 
   const handleUpdate = async (event) => {

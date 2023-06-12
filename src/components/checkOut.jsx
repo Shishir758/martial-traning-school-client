@@ -10,7 +10,7 @@ const CheckOut = ({fees}) => {
     const [cardError, setCardError] =useState([])
 
     useEffect(() => {
-      fetch('http://localhost:5000/createPayment', {
+      fetch('https://assignment-twelve-server-pi.vercel.app/createPayment', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ fees }), 
