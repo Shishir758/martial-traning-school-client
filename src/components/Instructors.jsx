@@ -1,4 +1,3 @@
-import React, { useState, useEffect} from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import { Link, useLoaderData } from 'react-router-dom';
@@ -9,15 +8,6 @@ const Instructors = () => {
   useTitle('Instructors')
   const users= useLoaderData()
   const instructors= users.filter(user=> user.role==='Instructor')
-
-
-
-
- /*  useEffect(() => {
-    fetch('https://assignment-twelve-server-pi.vercel.app/users')
-      .then((res) => res.json())
-      .then((data) => setDetailsData(data));
-  }, []); */
 
 
   return (

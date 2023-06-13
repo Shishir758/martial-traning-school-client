@@ -15,12 +15,12 @@ const Register = () => {
   const { createUser } = useContext(AuthContext);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [passwordMatch, setPasswordMatch] = useState(false);
   const navigate = useNavigate();
-
   const auth = getAuth();
   const providerGoogle = new GoogleAuthProvider();
-
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+  const { register, handleSubmit, formState: { errors, isSubmitting }, watch } = useForm();
 
   const validatePassword = (value) => {
     // Check if password is at least 6 characters long
@@ -44,7 +44,7 @@ const Register = () => {
   const onSubmit = (data) => {
     const { email, password, username, profilePhoto } = data;
     const role = 'Student';
-    const userData = { email, username, photoUrl: profilePhoto, role };
+    const userData = { email, password, username, photoUrl: profilePhoto, role };
 
     createUser(email, password)
       .then((userCredential) => {
@@ -63,7 +63,7 @@ const Register = () => {
         setError(error.message);
       });
 
-    fetch('https://assignment-twelve-server-pi.vercel.app/users', {
+    fetch('http://localhost:http://localhost:5000users', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(userData)
@@ -72,7 +72,7 @@ const Register = () => {
       .then(data => {
         Swal.fire({
           title: 'Success!',
-          text: 'Successfully added with toy list.',
+          text: 'Registartion Successfull.',
           icon: 'info',
           confirmButtonText: 'Close',
         });
@@ -93,11 +93,16 @@ const Register = () => {
       });
   };
 
-
+  const handleConfirmPasswordChange = (e) => {
+    const confirmValue = e.target.value;
+    setPasswordConfirm(confirmValue);
+    setPasswordMatch(confirmValue === watch('password'));
+  };
+  
   return (
     <>
       <Header />
-      <div className="w-full max-w-xs mx-auto">
+      <div className="w-full max-w-md mx-auto">
         <p className="text-center font-bold text-gray-500 text-2xl mt-5">
           Please Register
         </p>
@@ -107,7 +112,7 @@ const Register = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-              Username
+              Name
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -116,7 +121,7 @@ const Register = () => {
               placeholder="username"
               {...register('username', { required: true })}
             />
-            {errors.username && <p className="text-red-500 text-xs italic">Username is required</p>}
+            {errors.username && <p className="text-red-500 text-md italic">Username is required</p>}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -130,7 +135,7 @@ const Register = () => {
               placeholder="Email Address"
               {...register('email', { required: true })}
             />
-            {errors.email && <p className="text-red-500 text-xs italic">Email is required</p>}
+            {errors.email && <p className="text-red-500 text-md italic">Email is required</p>}
           </div>
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
@@ -142,32 +147,41 @@ const Register = () => {
                 id="password"
                 type="password"
                 name="password"
-                placeholder="*********"
+                placeholder="Password"
                 {...register('password', { required: true, validate: validatePassword })}
               />
-              <span
-                className="absolute top-3 right-2 text-gray-500 cursor-pointer"
-                onClick={() => {
-                  const passwordField = document.getElementById('password');
-                  if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                  } else {
-                    passwordField.type = 'password';
-                  }
-                }}
-              >
-                Show
-              </span>
             </div>
             {errors.password && (
-              <p className="text-red-500 text-xs italic">
+              <p className="text-red-500 text-md italic">
                 {errors.password.type === 'required'
                   ? 'Password is required'
-                  : 'Invalid password'}
+                  : 'Password must contain minimum 6 characters with at least one capital letter and one special character'}
               </p>
             )}
-            {error && <p className="text-red-500 text-xs italic">{error}</p>}
           </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
+              Confirm Password
+            </label>
+            <div className="relative">
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="confirmPassword"
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                {...register('confirmPassword', {
+                  required: true,
+                  validate: (value) => value === watch('password')
+                })}
+                onChange={handleConfirmPasswordChange}
+              />
+              <span className="absolute top-3 right-2 text-gray-500 cursor-pointer">
+                {passwordMatch ? 'Matched' : 'Not Matched'}
+              </span>
+            </div>
+          </div>
+          {error && <p className="text-red-500 text-xs italic">{error}</p>}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="profilePhoto">
               Profile Picture URL

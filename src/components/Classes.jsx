@@ -1,26 +1,32 @@
 
 import React, { useContext, useEffect, useState } from 'react';
-import {useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useTitle from '../useTitle';
 import Footer from './Footer';
 import Header from './Header';
 import { AuthContext } from './provider/AuthProviders';
+import 'animate.css';
 
 const Classes = () => {
   const { user } = useContext(AuthContext);
   const users= useLoaderData()
   const [userClasses, setUserClasses] = useState([]);
+ 
+
+  const userRole =userClasses.map(userRole=>userRole.role==='Admin' ||userRole.role==='Instructor')
+  console.log(userClasses, userRole);
+
 
   useEffect(() => {
-    const adminOrIns= users.find(use=>use.role==='Admin' || use.role==='Instructor' && use.instructorEmail===user?.email)
+    const adminOrIns= users.filter(use=>use.role==='Admin' || use.role==='Instructor' && use.instructorEmail===user?.email)
     setUserClasses(adminOrIns)
   }, [user, users]);
 
 
   const [classes, setClasses] = useState([])
   useEffect(() => {
-    fetch('https://assignment-twelve-server-pi.vercel.app/classes')
+    fetch('http://localhost:5000/classes')
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
@@ -32,29 +38,37 @@ const Classes = () => {
   
 
   const enrollClass = (clas) => {
-    const selectedClass = { clas, email: user.email };
-    fetch('http://localhost:5000/selectedClasses', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(selectedClass),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'The class has been saved!!',
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        return data;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
-  
 
+    if(user){
+      const selectedClass = { clas, email: user.email };
+      fetch('http://localhost:5000/selectedClasses', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(selectedClass),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'The class has been saved!!',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          return data;
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }else{
+      Swal.fire({
+        title: 'You have to Login to select the class.',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }})}};
 
 
   return (
@@ -66,23 +80,23 @@ const Classes = () => {
       <img src={clas.classPhoto} alt="Truck" className="w-full mb-4 h-96" />
       <h3 className="text-md font-semibold mb-2">Class Name: <b>{clas.className}</b></h3>
       <h3 className="text-md font-semibold mb-2">Name of Instructor: <b>{clas.instructorName}</b></h3>
-      <h3 className="text-md font-semibold mb-2">Email of Instructor: <b>{clas.instructorEmail}</b></h3>
+
 
       <div className="px-6 pt-4 pb-2 text-center">
-      <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Price: USD$ {clas.fees}</span>
+      <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Price: USD ${clas.fees}</span>
       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Available Seat. {clas.seats}</span><br></br>
      <br></br>
 
     {/* //TODO Enable disable condition */}
 
     <>
-    {clas.seats <= 0 ? (
+    {clas.seats <= 0 ?  (
   <button className='bg-blue-300 w-full rounded-md font-bold text-white text-1xl px-4 py-2 my-2' disabled>
-    Enroll
+    SELECT
   </button>
 ) : (
   <button onClick={() => enrollClass(clas)} className='bg-blue-500 w-full rounded-md font-bold text-white text-1xl px-4 py-2 my-2'>
-    Enroll
+    SELECT
   </button>
 )}
 

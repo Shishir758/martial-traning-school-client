@@ -11,7 +11,7 @@ const Header = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch(`https://assignment-twelve-server-pi.vercel.app/users/${user?.email}`)
+    fetch(`http://localhost:5000/users/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -86,14 +86,7 @@ const Header = () => {
         <div>
           {!user ? (
             <React.Fragment>
-              <NavLink
-                exact
-                to="/register"
-                className={`block mt-4 lg:inline-block lg:mt-0 font-bold hover:text-blue-500 mr-4 text-xl ${isActive('/register') ? 'text-blue-500' : ''}`}
-                isActive={isActive}
-              >
-                Register
-              </NavLink>
+             
               <NavLink
                 exact
                 to="/login"
@@ -113,15 +106,7 @@ const Header = () => {
                 Dashboard
               </NavLink>
 
-              {admin && (
-                <NavLink
-                  to="/addclass"
-                  className={`inline-block text-xl px-4 py-2 leading-none border rounded border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0 last-child ${isActive('/addclass') ? 'text-blue-500' : ''}`}
-                  isActive={isActive}
-                >
-                  Add Class
-                </NavLink>
-              )}
+       
                {instructor && (
                 <NavLink
                   to="/addclass"

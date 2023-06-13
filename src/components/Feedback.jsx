@@ -37,7 +37,7 @@ const Feedback = () => {
       })
         .then((result) => {
           if (result.isConfirmed) {
-            fetch(`https://assignment-twelve-server-pi.vercel.app/feedback/${id}`, {
+            fetch(`http://localhost:5000/feedback/${id}`, {
               method: 'PATCH',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(updateInfo)

@@ -1,32 +1,23 @@
 import React, { useState} from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import 'react-tabs/style/react-tabs.css';
 import '@smastrom/react-rating/style.css'
-
 import useTitle from '../useTitle';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
-
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import '../components/home.css';
-
-
 import slider1 from '../assest/sliderImage/1.jpg';
 import slider2 from '../assest/sliderImage/2.jpg';
 import slider3 from '../assest/sliderImage/3.jpg';
 import slider4 from '../assest/sliderImage/4.jpg';
 import slider5 from '../assest/sliderImage/5.jpg';
 
-
-
 const Home = () => {
   const users= useLoaderData()
   const instructors= users.filter(user=> user.role==='Instructor')
-
   const [theme, setTheme] = useState('light');
-
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
@@ -34,7 +25,7 @@ const Home = () => {
 
   const [classes, setClasses] = useState([])
   useEffect(() => {
-    fetch('https://assignment-twelve-server-pi.vercel.app/classes')
+    fetch('http://localhost:5000/classes')
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
@@ -49,7 +40,6 @@ const Home = () => {
 return (
   <>
   <button className='btn mx-2 mb-2 bg-cyan-300 rounded-sm py-1 px-1' onClick={toggleTheme}>Light/Dark</button>
-
 
    <div className={`theme-${theme}`}>
 
@@ -101,14 +91,14 @@ return (
 
 
     <div className=' mx-auto lg:w-3/4'>
-      <h1 className='text-center font-bold text-2xl mt-10'>Martial Arts Classes</h1>
+      <h1 className='text-center font-bold text-2xl mt-10'>Martial Arts Classes (Popular)</h1>
 
     </div>
     <div className="mx-5 grid lg:grid-cols-3 mb-8 gap-4 h-full">
-      {approvedClasses.map((clas) => (
+      {approvedClasses.slice(0,6).map((clas) => (
       <div key={clas._id} className={`${clas.seats > 0 ? 'bg-white' : 'bg-red-300'
     } rounded-lg shadow-md p-6 flex flex-col h-full`}>
-      <img src={clas.classPhoto} alt="Truck" className="w-full mb-4 h-96" />
+      <img src={clas.classPhoto} alt="instructor" className="w-full mb-4 h-96" />
       <h3 className="text-md font-semibold mb-2">Class Name: <b>{clas.className}</b></h3>
       <h3 className="text-md font-semibold mb-2">Name of Instructor: <b>{clas.instructorName}</b></h3>
       <h3 className="text-md font-semibold mb-2">Email of Instructor: <b>{clas.instructorEmail}</b></h3>
@@ -129,9 +119,9 @@ return (
       
     </div>
 
-    <div className="mx-6 grid lg:grid-cols-4 mb-8 gap-4 h-full">
+    <div className="mx-6 grid lg:grid-cols-3 mb-8 gap-12 h-full">
         
-        {instructors.map((instructor) => (
+        {instructors.slice(0,6).map((instructor) => (
           <div key={instructor._id} className="bg-white rounded-lg shadow-md p-2 flex flex-col h-full">
             <img src={instructor.photoUrl} alt="Instructor" className="rounded-xl w-full mb-4 h-96" />
             <div className="px-4 pb-2 text-center">

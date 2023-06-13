@@ -1,18 +1,35 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from './provider/AuthProviders';
 
 const CheckOut = ({ fees}) => {
+  const { user} = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState('');
   const [clientSecret, setClientSecret] = useState('');
   const [processing, setProcessing] = useState(false);
+  const [selectedClasses, setSelectedClasses] = useState([]);
+
 
   useEffect(() => {
-    fetch('http://localhost:5000/createPayment', {
+    fetch(`http://localhost:http://localhost:5000selectedClasses/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSelectedClasses(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+
+
+   useEffect(() => {
+    fetch('http://localhost:http://localhost:5000createPayment', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ fees }),
+      body: JSON.stringify(),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -22,7 +39,6 @@ const CheckOut = ({ fees}) => {
         console.error('Error:', error);
       });
   }, []);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!stripe || !elements) {

@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <App></App>,
     errorElement: <ErrorPage />,
-    loader: () => fetch('https://assignment-twelve-server-pi.vercel.app/users')
+    loader: () => fetch('http://localhost:5000/users')
   },
 
   {
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
   {
     path: 'classes',
     element: <Classes/>,
-    loader: () => fetch('https://assignment-twelve-server-pi.vercel.app/users')
+    loader: () => fetch('http://localhost:5000/users')
   },
   {
     path: 'login',
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
   {
     path: 'dashboard',
     element: <DashBoard/>,
-    loader: () => fetch('https://assignment-twelve-server-pi.vercel.app/classes')
+    loader: () => fetch('http://localhost:5000/classes')
   },
   {
     path: 'addclass',
@@ -66,17 +66,17 @@ const router = createBrowserRouter([
   {
     path: 'instructors',
     element: <Instructors></Instructors>,
-    loader: () => fetch('https://assignment-twelve-server-pi.vercel.app/users')
+    loader: () => fetch('http://localhost:5000/users')
   },
   {
     path: 'updateclass/:id',
     element: <UpdateClass/>,
-    loader: () => fetch('https://assignment-twelve-server-pi.vercel.app/classes')
+    loader: () => fetch('http://localhost:5000/classes')
   },
   {
     path: 'feedback/:id',
     element: <Feedback/>,
-    loader: () => fetch('https://assignment-twelve-server-pi.vercel.app/classes')
+    loader: () => fetch('http://localhost:5000/classes')
   }
   
 
