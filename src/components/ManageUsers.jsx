@@ -72,7 +72,7 @@ const ManageUsers = () => {
   return (
     <>
       <Header></Header>
-      <h1 className='mb-8 font-bold text-4xl text-center text-orange-500'>Manage User Dashboard</h1>
+      <h1 className='mb-8 font-bold text-4xl text-center text-orange-500'>Users Management Dashboard</h1>
       <div className="mx-8">
   <table className="table w-full">
     <thead>

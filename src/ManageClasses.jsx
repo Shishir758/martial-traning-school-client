@@ -58,7 +58,8 @@ const ManageClasses = () => {
     return (
         <>
         <Header/>
-        <div className="mx-5 grid lg:grid-cols-3 mb-8 gap-4 h-full"> {/* //data-aos='fade-up */}
+        <h1 className='mb-8 font-bold text-4xl text-center text-orange-500'>All class Management Dashboard</h1>
+        <div className="mx-5 grid lg:grid-cols-3 mb-8 gap-4 h-full">
       {classes.map((clas) => (
         <div key={clas._id} className="bg-white rounded-lg shadow-md p-6 flex flex-col h-full">
           <img src={clas.classPhoto} alt="Truck" className="w-full mb-4 h-96" />
