@@ -28,6 +28,7 @@ const AddClass = () => {
   const { user, loading } = useContext(AuthContext);
   const [classes, setClasses] = useState(initialState);
 
+
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -80,8 +81,11 @@ const handleChange = async (e) => {
       text: 'Successfully added class.',
       icon: 'info',
       confirmButtonText: 'Close',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/dashboard';
+      }
     });
-    setClasses(initialState);
   };
 
 

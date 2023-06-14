@@ -207,7 +207,7 @@ const DashBoard = () => {
       </tr>
     </thead>
     <tbody className='text-center'>
-      {myClasses.map((myclass) => (
+     {/*  {myClasses.map((myclass) => (
       <tr key={myclass._id}>
         <td>
           <div className="flex items-center space-x-3 justify-around">
@@ -228,7 +228,7 @@ const DashBoard = () => {
       className='bg-green-300 rounded-md text-white text-lg text-bold px-4 py-2 my-2'
     disabled>Enrolled</button>
   </td>
-</tr>))}
+</tr>))} */}
 </tbody>
   </table>
          </div>

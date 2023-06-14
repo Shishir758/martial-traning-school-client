@@ -73,7 +73,7 @@ const Classes = () => {
 
   return (
     <><Header></Header>
-     <div className="mx-5 grid lg:grid-cols-3 mb-8 gap-4 h-full">
+     <div className="mx-5 grid lg:grid-cols-4 mb-8 gap-4 h-full">
       {approvedClasses.map((clas) => (
       <div key={clas._id} className={`${clas.seats > 0 ? 'bg-white' : 'bg-red-300'
     } rounded-lg shadow-md p-6 flex flex-col h-full`}>
@@ -82,9 +82,9 @@ const Classes = () => {
       <h3 className="text-md font-semibold mb-2">Name of Instructor: <b>{clas.instructorName}</b></h3>
 
 
-      <div className="px-6 pt-4 pb-2 text-center">
-      <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Price: USD ${clas.fees}</span>
-      <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Available Seat. {clas.seats}</span><br></br>
+      <div className="px-2 pt-4 pb-2 text-center">
+      <span className="inline-block bg-gray-200 rounded-full px-1 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Price: USD ${clas.fees}</span>
+      <span className="inline-block bg-gray-200 rounded-full px-1 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Available Seat. {clas.seats}</span><br></br>
      <br></br>
 
     {/* //TODO Enable disable condition */}

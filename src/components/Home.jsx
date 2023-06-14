@@ -13,11 +13,16 @@ import slider2 from '../assest/sliderImage/2.jpg';
 import slider3 from '../assest/sliderImage/3.jpg';
 import slider4 from '../assest/sliderImage/4.jpg';
 import slider5 from '../assest/sliderImage/5.jpg';
+import { FiMoon, FiSun } from 'react-icons/fi';
+
 
 const Home = () => {
   const users= useLoaderData()
   const instructors= users.filter(user=> user.role==='Instructor')
+ 
+
   const [theme, setTheme] = useState('light');
+
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
@@ -39,7 +44,9 @@ const Home = () => {
 
 return (
   <>
-  <button className='btn mx-2 mb-2 bg-cyan-300 rounded-sm py-1 px-1' onClick={toggleTheme}>Light/Dark</button>
+ <button className='btn mx-2 mb-2= rounded-sm py-1 px-1' onClick={toggleTheme}>
+  {theme === 'light' ? <FiSun /> : <FiMoon />}
+</button>
 
    <div className={`theme-${theme}`}>
 
@@ -103,7 +110,7 @@ return (
       <h3 className="text-md font-semibold mb-2">Name of Instructor: <b>{clas.instructorName}</b></h3>
       <h3 className="text-md font-semibold mb-2">Email of Instructor: <b>{clas.instructorEmail}</b></h3>
 
-      <div className="px-6 pt-4 pb-2 text-center">
+      <div className="px-2 pt-4 pb-2 text-center">
       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Price: USD$ {clas.fees}</span>
       <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Available Seat. {clas.seats}</span><br></br>
      <br></br>

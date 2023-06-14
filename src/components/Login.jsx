@@ -11,6 +11,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import useTitle from '../useTitle';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'
 
+
 const auth = getAuth(app);
 
 const Login = () => {
