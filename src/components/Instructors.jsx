@@ -2,6 +2,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { Link, useLoaderData } from 'react-router-dom';
 import useTitle from '../useTitle';
+import { Zoom } from 'react-awesome-reveal';
 
 
 const Instructors = () => {
@@ -14,6 +15,8 @@ const Instructors = () => {
     <>
       <Header />
       <h1 className='text-center font-bold text-4xl mt-4 mb-6'>All instructor of our Team</h1>
+     <Zoom>
+     
       <div className="mx-6 grid lg:grid-cols-4 mb-8 gap-4 h-full">
         
         {instructors.map((instructor) => (
@@ -33,6 +36,7 @@ const Instructors = () => {
           </div>
         ))}
       </div>
+     </Zoom>
       <Footer />
     </>
   );

@@ -7,6 +7,7 @@ import Footer from './Footer';
 import Header from './Header';
 import { AuthContext } from './provider/AuthProviders';
 import 'animate.css';
+import { Slide } from 'react-awesome-reveal';
 
 const Classes = () => {
   const { user } = useContext(AuthContext);
@@ -73,7 +74,10 @@ const Classes = () => {
 
   return (
     <><Header></Header>
-     <div className="mx-5 grid lg:grid-cols-4 mb-8 gap-4 h-full">
+    <h1 className='text-center font-bold text-4xl mt-4 mb-6'>All of our classes</h1>
+        <Slide>
+        
+        <div className="mx-5 grid lg:grid-cols-4 mb-8 gap-4 h-full">
       {approvedClasses.map((clas) => (
       <div key={clas._id} className={`${clas.seats > 0 ? 'bg-white' : 'bg-red-300'
     } rounded-lg shadow-md p-6 flex flex-col h-full`}>
@@ -117,6 +121,7 @@ const Classes = () => {
         </div>
       ))}
     </div>
+        </Slide>
       <Footer />
 
 

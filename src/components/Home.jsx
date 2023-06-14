@@ -101,7 +101,7 @@ return (
       <h1 className='text-center font-bold text-2xl mt-10'>Martial Arts Classes (Popular)</h1>
 
     </div>
-    <div className="mx-5 grid lg:grid-cols-3 mb-8 gap-4 h-full">
+    <div className="mx-5 grid lg:grid-cols-3 mb-8 gap-4 h-full" data-aos="fade-up">
       {approvedClasses.slice(0,6).map((clas) => (
       <div key={clas._id} className={`${clas.seats > 0 ? 'bg-white' : 'bg-red-300'
     } rounded-lg shadow-md p-6 flex flex-col h-full`}>
@@ -126,7 +126,9 @@ return (
       
     </div>
 
-    <div className="mx-6 grid lg:grid-cols-3 mb-8 gap-12 h-full">
+    <div className="mx-6 grid lg:grid-cols-3 mb-8 gap-12 h-full" data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="2000">
         
         {instructors.slice(0,6).map((instructor) => (
           <div key={instructor._id} className="bg-white rounded-lg shadow-md p-2 flex flex-col h-full">
