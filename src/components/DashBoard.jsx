@@ -19,6 +19,7 @@ const DashBoard = () => {
   const classes = useLoaderData();
 
 
+
   useEffect(() => {
     const usersClass = classes.filter(clas=>clas.instructorEmail===user?.email);
     setUserClasses(usersClass)
@@ -118,8 +119,13 @@ const DashBoard = () => {
        <>
         <h1 className='mb-8 font-bold text-4xl text-center text-orange-500'>Student Dashboard</h1>
         <div className='grid grid-cols-2'>
+          
+
          
-         <div> <table className="table w-full">
+         <div> 
+         <h1 className='mb-8 font-bold text-xl text-center'>My Selected Class</h1>
+          <table className="table w-full">
+          
     <thead>
       <tr>
         <th>Profile Photo</th>
@@ -149,10 +155,26 @@ const DashBoard = () => {
   <td>
 
     
-  <Link to={`/payment/${myclass.clas}`}><button
-      onClick={() => handlePaymentClick()}
-      className='bg-orange-500 rounded-md text-white text-bold px-4 py-2 my-2'
-    >Pay</button></Link>
+  <Link to={`/payment/${myclass.clas._id}`}>
+  <button
+    onClick={handlePaymentClick}
+    className='bg-orange-500 rounded-md text-white text-bold px-4 py-2 my-2'
+  >
+    Pay
+  </button>
+</Link>
+
+
+{/* 
+    
+  <Link to={`/payment/${parseFloat(parseInt(myclass.clas.fees).toFixed(2))}`}>
+  <button
+    onClick={handlePaymentClick}
+    className='bg-orange-500 rounded-md text-white text-bold px-4 py-2 my-2'
+  >
+    Pay
+  </button>
+</Link> */}
 
     
 
@@ -166,9 +188,12 @@ const DashBoard = () => {
 
   </td>
 </tr>))}
+
+
 </tbody>
   </table></div>
          <div>
+         <h1 className='mb-8 font-bold text-xl text-center'>My Paid Class</h1>
          <table className="table w-full">
          
     <thead>
@@ -197,6 +222,7 @@ const DashBoard = () => {
         <td>{myclass.clas.className}<br/></td>
         <td>{myclass.clas.instructorName}<br/></td>
         <td>$ {myclass.clas.fees}<br/></td>
+        <td>$ {myclass.clas.fees}<br/></td>
   <td>
     <button
       className='bg-green-300 rounded-md text-white text-lg text-bold px-4 py-2 my-2'
@@ -214,7 +240,11 @@ const DashBoard = () => {
 
       {instructor && (
         <>
-        <h1 className='mb-12 font-bold text-4xl text-center text-orange-500'>Instructor Dashboard</h1>
+        <h1 className=' font-bold text-4xl text-center text-orange-500'>Instructor Dashboard</h1>
+        <div>
+        <h1 className=' font-bold text-xl mx-16 text-gray-500'>Total Enrolled Students: 0</h1>
+        </div>
+        <h1 className=' font-bold text-2xl text-center'>My Classes</h1>
         <div className="mx-5 grid lg:grid-cols-3 mb-8 gap-4 h-full"> 
       {userClasses?.map((clas) => (
         <div key={clas._id} className="bg-white rounded-lg shadow-md p-6 flex flex-col h-full">

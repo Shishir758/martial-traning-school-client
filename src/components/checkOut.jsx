@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './provider/AuthProviders';
 
-const CheckOut = ({ fees}) => {
+const CheckOut = ({id}) => {
   const { user} = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
@@ -12,8 +12,16 @@ const CheckOut = ({ fees}) => {
   const [selectedClasses, setSelectedClasses] = useState([]);
 
 
-  useEffect(() => {
-    fetch(`http://localhost:http://localhost:5000selectedClasses/${user?.email}`)
+  console.log(selectedClasses, id);
+
+
+
+
+
+
+
+   useEffect(() => {
+    fetch(`http://localhost:5000/selectedClasses/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSelectedClasses(data);
@@ -26,10 +34,10 @@ const CheckOut = ({ fees}) => {
 
 
    useEffect(() => {
-    fetch('http://localhost:http://localhost:5000createPayment', {
+    fetch('http://localhost:5000/createPayment', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(),
+      body: JSON.stringify(100),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -81,7 +89,7 @@ const CheckOut = ({ fees}) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className='mx-auto' onSubmit={handleSubmit} >
         <CardElement
           options={{
             style: {
