@@ -20,7 +20,7 @@ The Martial Arts Academy is a client-side web application built using React.js. 
 - React Router: Library for client-side routing.
 - AOS: Library for scroll-based animations.
 - React Responsive Carousel: Component for responsive image carousels.
-- React React Query: To fetch data.
+- React Awesome Revealn: To show animation .
 - react-router-dom: Package for adding routing functionality to React applications.
 - CSS Frameworks: Tailwind CSS for styling components.
 
