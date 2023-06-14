@@ -25,7 +25,7 @@ const ManageUsers = () => {
 
   
     useEffect(() => {
-      fetch(`/users`)
+      fetch(`https://assignment-twelve-server-pi.vercel.app/users`)
         .then((res) => res.json())
         .then((data) => {
           setUsers(data);
@@ -41,7 +41,7 @@ const ManageUsers = () => {
 
   const fetchData = async () => {
     try {
-      const response = await api.get('/users');
+      const response = await api.get('https://assignment-twelve-server-pi.vercel.app/users');
       const data = response.data;
       setUsers(data);
     } catch (error) {

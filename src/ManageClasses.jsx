@@ -6,7 +6,7 @@ import Header from './components/Header';
 import "animate.css";
 
 export const api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://assignment-twelve-server-pi.vercel.app/',
 });
 
 api.interceptors.response.use(
