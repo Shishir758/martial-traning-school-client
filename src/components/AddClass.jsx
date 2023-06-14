@@ -68,7 +68,7 @@ const handleChange = async (e) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:5000/classes', {
+    fetch('https://assignment-twelve-server-pi.vercel.app/classes', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(classes)

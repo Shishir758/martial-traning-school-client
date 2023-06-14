@@ -36,15 +36,15 @@ const UpdateClass = () => {
         confirmButtonText: 'Yes, update it!',
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:5000/updateclass/${id}`, {
-            method: 'PATCH',
+          fetch(`https://assignment-twelve-server-pi.vercel.app/updateclass/${id}`, {
+            method: 'put',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(updateInfo),
           })
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-              if (data.modificationCount=  0) {
+              if (data.modifiedCount >  0) {
                 Swal.fire({
                   title: 'Update!',
                   text: 'Information has been successfully updated.',
@@ -55,14 +55,7 @@ const UpdateClass = () => {
                     window.location.href = '/dashboard';
                   }
                 });
-              } else {
-                Swal.fire({
-                  title: 'No Update!',
-                  text: 'No changes were made to the information.',
-                  icon: 'info',
-                  allowOutsideClick: false,
-                });
-              }
+              } 
             });
         }
       });

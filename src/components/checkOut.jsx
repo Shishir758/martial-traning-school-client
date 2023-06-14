@@ -21,7 +21,7 @@ const CheckOut = ({id}) => {
 
 
    useEffect(() => {
-    fetch(`http://localhost:5000/selectedClasses/${user?.email}`)
+    fetch(`https://assignment-twelve-server-pi.vercel.app/selectedClasses/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSelectedClasses(data);
@@ -34,7 +34,7 @@ const CheckOut = ({id}) => {
 
 
    useEffect(() => {
-    fetch('http://localhost:5000/createPayment', {
+    fetch('https://assignment-twelve-server-pi.vercel.app/createPayment', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(100),

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import "animate.css";
 
 export const api = axios.create({
   baseURL: 'http://localhost:5000',
@@ -15,6 +16,8 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+
 
 const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -55,7 +58,6 @@ const ManageClasses = () => {
     return (
         <>
         <Header/>
-        <h1 className='mb-8 font-bold text-4xl text-center text-orange-500'>Manage Class Dashboard</h1>
         <div className="mx-5 grid lg:grid-cols-3 mb-8 gap-4 h-full"> {/* //data-aos='fade-up */}
       {classes.map((clas) => (
         <div key={clas._id} className="bg-white rounded-lg shadow-md p-6 flex flex-col h-full">
@@ -87,21 +89,11 @@ const ManageClasses = () => {
     <Link to={`/feedback/${clas._id}`}><button className='bg-orange-400 rounded-md text-white text-bold px-4 py-2 my-2'>
       Feedback
     </button></Link>
-    {/* <button className='bg-orange-400 rounded-md text-white text-bold px-4 py-2 my-2'>
-      Send Feedback
-    </button> */}
   </>
 )}
-
-
-
-        </div>
-        </div>
-      ))}
-    </div>
+</div></div>))}</div>
         <Footer/>
         </>
-    );
-};
+    );};
 
 export default ManageClasses;
