@@ -126,7 +126,7 @@ return (
       
     </div>
 
-    <div className="mx-6 grid lg:grid-cols-3 mb-8 gap-12 h-full" data-aos="flip-left"
+    <div className="mx-6 grid lg:grid-cols-3 mb-8 gap-12 h-full" data-aos="fade-right"
      data-aos-easing="ease-out-cubic"
      data-aos-duration="2000">
         
